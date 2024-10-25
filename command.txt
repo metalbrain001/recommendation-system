@@ -4,3 +4,5 @@ systemctl list-units --type=service --state=running
 
 
 systemctl list-unit-files --type=service --state=enabled
+
+docker login = dckr_pat_uk4nzBD3J7jsi_aICYq7aKk0RVg
