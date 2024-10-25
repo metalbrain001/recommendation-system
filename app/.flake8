@@ -1,0 +1,22 @@
+[flake8]
+exclude = 
+    .git,
+    __pycache__,
+    docs/source/conf.py,
+    old,
+    build,
+    dist,
+    venv,
+    .venv,
+    .tox,
+    .eggs,
+    migrations,
+    settings.py,
+    manage.py,
+    .vscode,
+    .github,
+    .idea,
+    .mypy_cache,
+    .pytest_cache,
+
+max-line-length = 120

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto">
+        <section class="flex items-center justify-center h-screen">
+            <h1 class="text-5xl">Django + Tailwind = ❤️</h1>
+            <p class="text-2xl"> Get Personalized Recommendations</p>
+            <a href="{% url 'recommendations' %}"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Get Recommendations
+          </a>
+        </section>
+    </div>
+{% endblock %}

@@ -1,0 +1,7 @@
+pandas
+numpy==1.26.0
+pillow==10.4.0
+scikit-learn==1.5.2
+scipy==1.14.1
+matplotlib==3.9.2
+scikit-surprise==1.1.4
