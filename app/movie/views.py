@@ -41,8 +41,13 @@ class MovieViewSet(
         Return objects for the current authenticated user only.
         """
 
-        return self.queryset.filter(
-          user=self.request.user).order_by("-movie_id")
+        genre = self.request.query_params.get("genre")
+        if genre:
+            return self.queryset.filter(
+                user=self.request.user, genres__regex=rf"\b{genre}\b"
+            ).order_by("-movie_id")
+
+        return self.queryset.filter(user=self.request.user).order_by("-movie_id")
 
     def get_serializer_class(self):
         """
@@ -59,3 +64,24 @@ class MovieViewSet(
         """
 
         serializer.save(user=self.request.user)
+
+    def update(self, request, *args, **kwargs):
+        """
+        Update a movie. Only the owner can update.
+        """
+
+        instance = self.get_object()
+        if instance.user != request.user:
+            raise PermissionDenied("You do not have permission to edit this movie.")
+        return super().update(request, *args, **kwargs)
+
+    def partial_update(self, request, *args, **kwargs):
+        """
+        Partially update a movie.
+        Only the owner can update.
+        """
+
+        instance = self.get_object()
+        if instance.user != request.user:
+            raise PermissionDenied("You do not have permission to edit this movie.")
+        return super().partial_update(request, *args, **kwargs)
