@@ -60,7 +60,7 @@ class publicMovieApiTests(TestCase):
 
 class privateMovieApiTests(TestCase):
     """
-    Test the private movies API.
+    Test the private movies API for authenticated users.
     """
 
     def setUp(self):
