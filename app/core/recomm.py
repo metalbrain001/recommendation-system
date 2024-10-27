@@ -62,7 +62,7 @@ class RecommenderSystem:
         sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
 
         # Get the top-n movie indices based on similarity
-        movie_indices = [i[0] for i in sim_scores[1 : top_n + 1]]
+        movie_indices = [i[0] for i in sim_scores[1 : top_n + 1]]  # noqa: E203
         return self.movies["title"].iloc[movie_indices]
 
     def collaborative_filtering(self):
