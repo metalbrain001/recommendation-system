@@ -177,4 +177,6 @@ app/src/ml-32m/links.csv
 *.xlsx
 *.pkl
 
+/Users/timeless/recommendation-system/app/src/notebooks/data/
+
 local-cdn/

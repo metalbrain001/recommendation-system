@@ -34,3 +34,5 @@ Use Popularity-Based Recommendations for new users who lack a rating history.
 Content-Based Boosting: Recommend movies based on genre or other content features for users with minimal activity.
 New Movie Recommendations: For new movies with little to no ratings, you can make recommendations based on popularity or promote similar titles.
 Each of these enhancements can improve the recommendations and address common challenges like data sparsity and evolving user preferences. Together, they build a more robust, personalized system that users will find increasingly valuable and engaging.
+
+env LDFLAGS='-L/usr/local/lib -L/usr/local/opt/openssl/lib -L/usr/local/opt/readline/lib' pip install psycopg2

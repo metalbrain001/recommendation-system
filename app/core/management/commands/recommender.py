@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from core.recommender import RecommenderSystem
+from core.recomm import RecommenderSystem
 
 
 class Command(BaseCommand):
