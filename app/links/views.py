@@ -47,9 +47,11 @@ class LinkViewSet(
         """
 
         movie_id = self.request.query_params.get("movie_id")
-        queryset = queryset = self.queryset.order_by("-id")
+        queryset = self.queryset.filter(movie__user=self.request.user).order_by("-id")
+
         if movie_id:
             queryset = queryset.filter(movie__id=movie_id)
+
         return queryset
 
     def get_serializer_class(self):
@@ -65,14 +67,14 @@ class LinkViewSet(
         """
         Create a new link.
         """
-        serializer.save(user=self.request.user)
+        serializer.save()
 
     def update(self, request, *args, **kwargs):
         """
         Update a link. Only the owner can update.
         """
         instance = self.get_object()
-        if instance.user != request.user:
+        if instance.movie.user != request.user:
             raise PermissionDenied("You do not have permission to edit this link.")
         return super().update(request, *args, **kwargs)
 
@@ -81,6 +83,6 @@ class LinkViewSet(
         Partially update a link. Only the owner can update.
         """
         instance = self.get_object()
-        if instance.user != request.user:
+        if instance.movie.user != request.user:
             raise PermissionDenied("You do not have permission to edit this link.")
         return super().partial_update(request, *args, **kwargs)
