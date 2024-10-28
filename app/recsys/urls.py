@@ -9,4 +9,5 @@ from . import views
 urlpatterns = [
     # path("", home),
     path("", views.home, name=""),
+    path("movies_list/", views.movies_list, name="movies_list"),
 ]

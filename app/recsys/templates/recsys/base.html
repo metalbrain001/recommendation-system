@@ -1,0 +1,34 @@
+<!-- /recsys/templates/recsys/base.html -->
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}MetalBrain{% endblock %}</title>
+    {% tailwind_css %}
+</head>
+
+<body class="bg-black text-white">
+    <div class="container mx-auto">
+        <!-- Header section -->
+        <header class="flex flex-col items-center justify-center h-screen space-y-5">
+            <h1 class="text-5xl">Movie Recommendations</h1>
+            <p class="text-2xl">Get Personalized Recommendations</p>
+            <p class="text-2xl">Powered by MetalBrain Inc ❤️</p>
+        </header>
+
+        <!-- Main content block -->
+        <main class="py-8">
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- Optional footer -->
+        <footer class="text-center py-4">
+            <p>© 2023 MetalBrain Inc. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

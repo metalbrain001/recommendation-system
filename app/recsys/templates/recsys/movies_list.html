@@ -1,0 +1,24 @@
+<!-- recsys/templates/recsys/movies_list.html -->
+{% load static tailwind_tags %}
+{% tailwind_css %}
+
+
+{% block title %}
+Movie Recommendation System
+{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto my-8 p-6 rounded-lg shadow-lg">
+    <h1 class="text-3xl font-bold text-center mb-8 text-blue-600">Movies List</h1>
+    <ul class="movie-list space-y-4">
+        {% for movie in movies %}
+            <li class="movie-ite p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <h2 class="text-xl font-semibold text-light-2">{{ movie.title }}</h2>
+                <p class="text-light-3">Genres: {{ movie.genres }}</p>
+            </li>
+        {% empty %}
+            <p class="text-light-2 text-center">No movies available.</p>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
