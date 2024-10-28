@@ -3,7 +3,6 @@ This module contains the views for the recsys app.
 """
 
 from django.shortcuts import render
-from .tmdb import TMDbImageFetcher
 from core.models import Movie
 
 
