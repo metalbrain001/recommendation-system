@@ -71,6 +71,7 @@ class Movie(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     imdb_id = models.BigIntegerField(blank=True, null=True)
     tmdb_id = models.FloatField(blank=True, null=True)
+    poster_url = models.URLField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

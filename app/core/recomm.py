@@ -1,3 +1,7 @@
+"""
+Module for content and collaborative filtering recommendations.
+"""
+
 import pandas as pd
 from sqlalchemy import create_engine
 from sklearn.feature_extraction.text import TfidfVectorizer

@@ -1,3 +1,8 @@
+"""
+Stream tags data directly into the PostgreSQL database
+with on-the-fly timestamp conversion using the COPY command.
+"""
+
 import csv
 import io
 from datetime import datetime, timezone
@@ -34,7 +39,7 @@ class StreamTagToDb:
                 WHERE user_id = %s
                 AND movie_id = %s
                 """,
-                [user_id, movie_id]
+                [user_id, movie_id],
             )
             return cursor.fetchone()
 
@@ -53,8 +58,8 @@ class StreamTagToDb:
 
         try:
             with connection.cursor() as cursor:
-                with open(file_path, 'r') as f:
-                    reader = csv.reader(f, quotechar='"', delimiter=',')
+                with open(file_path, "r") as f:
+                    reader = csv.reader(f, quotechar='"', delimiter=",")
                     next(reader)
                     buffer = io.StringIO()
                     writer = csv.writer(buffer)
@@ -90,7 +95,7 @@ class StreamTagToDb:
                         movie_id, tag, timestamp)
                         VALUES (%s, %s, %s, %s)
                         """,
-                        [user.id, movie_id, tag, timestamp]
+                        [user.id, movie_id, tag, timestamp],
                     )
 
                 print("Tags data streamed successfully!")

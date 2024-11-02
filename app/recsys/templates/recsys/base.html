@@ -6,28 +6,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}MetalBrain{% endblock %}</title>
     {% tailwind_css %}
 </head>
 
-<body class="bg-black text-white">
+<body class=" text-white md:block backdrop-brightness-50" style="background-image: url('{% static 'poster1.webp' %}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div class="container mx-auto">
         <!-- Header section -->
-        <header class="flex flex-col items-center justify-center h-screen space-y-5">
-            <h1 class="text-5xl">Movie Recommendations</h1>
-            <p class="text-2xl">Get Personalized Recommendations</p>
-            <p class="text-2xl">Powered by MetalBrain Inc ❤️</p>
+        <header class="flex flex-col items-center justify-center h-[90vh] space-y-5 bg-opacity-75">
+            <h1 class="h1-semibold text-glow"><span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-50 to-white">MOVIE RECOMMENDATION ENGINE</span></h1>
+            <p class="h2-bold text-glow"><span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-50 to-white">You cant decide what to watch? get personalized recommendations by</span></p>
+            <p class="h2-bold text-glow"><span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-50 to-white">answering a few questions ?</span></p>
+            <button class="home_button" type="submit">Start Here</button>
         </header>
 
         <!-- Main content block -->
-        <main class="py-8">
-            {% block content %}{% endblock %}
+        <main class="py-8 bg-opacity-75">
+            {% block content %}
+            {% endblock %}
         </main>
 
         <!-- Optional footer -->
-        <footer class="text-center py-4">
-            <p>© 2023 MetalBrain Inc. All rights reserved.</p>
+        <footer class="text-center py-4 bg-opacity-75">
+            <p class="base-semibold text-glow"><span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-50 to-slate-500" >© 2024 MetalBrain Inc. All rights reserved.</span></p>
         </footer>
     </div>
 </body>

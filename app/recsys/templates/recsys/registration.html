@@ -1,0 +1,69 @@
+<!-- registration.html -->
+{% load static tailwind_tags %}
+{% tailwind_css %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+</head>
+<body>
+    <section class="flex flex-col items-center justify-center gap-5 w-full h-screen mt-4">
+        <div>
+            <h1 class="text-3xl font-semibold">Join a Community of Millions of Movie Lovers</h1>
+        </div>
+        <form id="registrationForm" class="flex flex-col gap-2 w-[420px]">
+            {% csrf_token %}
+            {% render_field form.email placeholder="email" class+="form-control text-gray-900 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-cyan-500" %} <br>
+            {% render_field form.name placeholder="Full Name" class+="form-control text-gray-900 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-cyan-500" %} <br>
+            {% render_field form.password placeholder="Password" class+="form-control text-gray-900 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-cyan-500" %} <br>
+            <button type="submit" class="px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-pink-500 text-white font-semibold shadow-lg">Register</button>
+        </form>
+        <div id="message">
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </section>
+
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            // Gather form data
+            const formData = new FormData(event.target);
+            const data = {
+                email: formData.get("email"),
+                name: formData.get("name"),
+                password: formData.get("password")
+            };
+
+            // Submit to the API endpoint
+            const response = await fetch("{% url 'user:create' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            const messageDiv = document.getElementById("message");
+
+            if (response.status === 201) {
+                messageDiv.textContent = "Registration successful!";
+            } else {
+                messageDiv.textContent = "Error:" + (result.detail || "Unable to register");
+            }
+        });
+    </script>
+</body>
+</html>

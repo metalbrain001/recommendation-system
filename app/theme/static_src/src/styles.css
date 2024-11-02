@@ -19,7 +19,7 @@
   }
 
   .h1-semibold {
-    @apply text-[36px] font-semibold leading-[140%] tracking-tighter;
+    @apply text-[72px] font-semibold leading-[140%] tracking-tighter;
   }
 
   .h2-bold {
@@ -68,6 +68,10 @@
 
   .tiny-medium {
     @apply text-[10px] font-medium leading-[140%];
+  }
+
+  .text-glow {
+      filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.2)) drop-shadow(0 0 20px rgba(255, 20, 147, 0.2));
   }
 
   /* UTILITIES */
@@ -499,6 +503,10 @@
   /* Button */
   .shad-button_primary {
     @apply bg-primary-500 hover:bg-primary-500 text-light-7 flex gap-2 !important;
+  }
+
+  .home_button {
+    @apply rounded-full px-6 py-3 mt-10 text-white font-semibold bg-gradient-to-r from-cyan-500 to-pink-500 shadow-xl transform transition duration-300 ease-in-out hover:scale-105 !important;
   }
 
   .shad-button_dark_4 {

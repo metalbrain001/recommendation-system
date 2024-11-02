@@ -1,3 +1,7 @@
+"""
+Stream links data into the PostgreSQL database
+"""
+
 import csv
 import io
 from django.db import connection
@@ -17,7 +21,7 @@ class StreamLinksToDb:
 
         try:
             with connection.cursor() as cursor:
-                with open(file_path, 'r') as f:
+                with open(file_path, "r") as f:
                     reader = csv.reader(f)
                     next(reader)
                     buffer = io.StringIO()
@@ -33,9 +37,10 @@ class StreamLinksToDb:
 
                     buffer.seek(0)
                     cursor.copy_from(
-                        buffer, 'core_links',
-                        columns=('movie_id', 'imdb_id', 'tmdb_id'),
-                        sep=','
+                        buffer,
+                        "core_links",
+                        columns=("movie_id", "imdb_id", "tmdb_id"),
+                        sep=",",
                     )
                     buffer.truncate(0)
 

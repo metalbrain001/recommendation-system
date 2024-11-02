@@ -1,24 +1,55 @@
-<!-- recsys/templates/recsys/movies_list.html -->
 {% load static tailwind_tags %}
 {% tailwind_css %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Movie List</title>
 
+    <!-- Additional head content (CSS or JavaScript) -->
+    {% block extra_head %}
+    {% endblock %}
+</head>
+<body class="bg-gray-800 text-white">
+    <!-- Header Section -->
+    <header class="py-6 text-center bg-gray-900 shadow-lg">
+        <div class="flex items-center justify-center p-4">
+            <h1 class="text-3xl font-bold text-center text-blue-600">Over 80,000 Movies available.</h1>
+        </div>
+    </header>
 
-{% block title %}
-Movie Recommendation System
-{% endblock %}
+    <!-- Movie List Section -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
+        <div class="max-w-4xl mx-auto my-8 p-6 rounded-lg shadow-lg">
+            <ul class="movie-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-6">
+                {% for movie in movies %}
+                    <li class="movie-item p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow bg-slate-900 flex flex-col items-center">
+                        <!-- Image Placeholder with Larger Height and Hover Scale -->
+                        <div class="w-full h-62 bg-dark-1 rounded-md mb-4 flex items-center justify-center overflow-hidden">
+                            <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" class="w-full h-full object-cover rounded-md transform hover:scale-105 transition-transform duration-200">
+                        </div>
 
-{% block content %}
-<div class="max-w-4xl mx-auto my-8 p-6 rounded-lg shadow-lg">
-    <h1 class="text-3xl font-bold text-center mb-8 text-blue-600">Movies List</h1>
-    <ul class="movie-list space-y-4">
-        {% for movie in movies %}
-            <li class="movie-ite p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                <h2 class="text-xl font-semibold text-light-2">{{ movie.title }}</h2>
-                <p class="text-light-3">Genres: {{ movie.genres }}</p>
-            </li>
-        {% empty %}
-            <p class="text-light-2 text-center">No movies available.</p>
-        {% endfor %}
-    </ul>
-</div>
-{% endblock %}
+                        <!-- Movie Title and Genre -->
+                        <h2 class="text-lg font-semibold text-center">{{ movie.title }}</h2>
+                        <div class="flex text-center w-full justify-center">
+                            <p class="text-center text-gray-100 line-clamp-3">Genres: {{ movie.genres }}</p>
+                        </div>
+                        <p class="text-center text-yellow-400">
+                            Rating: {{ movie.average_rating|default:"N/A" }} / 5.0
+                        </p>
+                    </li>
+                {% empty %}
+                    <p class="text-light-2 text-center col-span-full">No movies available.</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </main>
+
+    <!-- Additional body content (scripts or modals) -->
+    {% block extra_body %}
+    {% endblock %}
+</body>
+</html>

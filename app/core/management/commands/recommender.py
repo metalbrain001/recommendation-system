@@ -1,3 +1,7 @@
+"""
+Django management command to run the recommender system
+"""
+
 from django.core.management.base import BaseCommand
 from core.recomm import RecommenderSystem
 
