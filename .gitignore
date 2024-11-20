@@ -180,3 +180,4 @@ app/src/ml-32m/links.csv
 /Users/timeless/recommendation-system/app/src/notebooks/data/
 
 local-cdn/
+.env.prod
