@@ -159,15 +159,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "theme/static_src/icons/"),
 ]
 
-if ENVIRONMENT == "docker":
-    # Docker-specific paths
-    MEDIA_ROOT = "/vol/web/media"
-    STATIC_ROOT = "/vol/web/static"
-else:
-    # Local paths for development and testing
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+# Docker-specific paths
+MEDIA_ROOT = "/vol/web/media"
+STATIC_ROOT = "/vol/web/static"
 
 MEDIA_URL = "/media/"
 STATIC_URL = "/static/"

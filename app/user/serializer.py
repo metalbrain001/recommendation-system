@@ -79,15 +79,3 @@ class AuthTokenSerializer(serializers.Serializer):
 
         attrs["user"] = user
         return attrs
-
-
-class UserImageSerializer(serializers.ModelSerializer):
-    """
-    Serializer for uploading images to user
-    """
-
-    class Meta:
-        model = get_user_model()
-        fields = ("id", "image")
-        read_only_fields = ("id",)
-        extra_kwargs = {"image": {"required": True}}
