@@ -256,11 +256,9 @@ class privateMovieApiTests(TestCase):
 
         res = self.client.get(MOVIES_URL, {"genres": "Animation"})
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(res.data["results"]), 2)
-        self.assertEqual(res.data["results"][0]["title"], "Jumanji")
-        self.assertEqual(res.data["results"][0]["genres"], "Action|Adventure")
-        self.assertEqual(res.data["results"][1]["title"], "Toy Story")
-        self.assertEqual(res.data["results"][1]["genres"], "Animation|Comedy")
+        self.assertEqual(len(res.data["results"]), 1)
+        self.assertEqual(res.data["results"][0]["title"], "Toy Story")
+        self.assertEqual(res.data["results"][0]["genres"], "Animation|Comedy")
 
     def test_movie_list_pagination(self):
         """

@@ -1,0 +1,60 @@
+<!-- Search Movies Section -->
+{% load static tailwind_tags %}
+{% tailwind_css %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/svg+xml">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Search Movies</title>
+</head>
+
+<body class="text-white">
+    <!-- Header Section -->
+    <header class="py-6 text-center shadow-lg">
+        <div class="flex items center justify-center p-4">
+            <h1 class="text-3xl font-bold text-center text-slate-300">Search for Movies</h1>
+        </div>
+    </header>
+
+    <!-- Search Form Section -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
+        <form action="{% url 'recsys:movies_search' %}" method="GET" class="flex items-center justify-center gap-4">
+            {% csrf_token %}
+            <input type="text" name="query" placeholder="Search for movies" class="p-2 rounded-md border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+            <button type="submit" class="px-4 py-2 bg-cyan-500 text-white rounded-md">Search</button>
+        </form>
+    </main>
+
+    <!-- Search Results Section -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
+        <div class="max-w-4xl mx-auto my-8 p-6 rounded-lg shadow-lg">
+            <ul class="movie-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-6">
+                {% for movie in movies %}
+                    <li class="movie-item p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow bg-slate-900 flex flex-col items-center">
+                        <!-- Image Placeholder with Larger Height and Hover Scale -->
+                        <div class="w-full h-62 bg-dark-1 rounded-md mb-4 flex items-center justify-center overflow-hidden">
+                          <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" class="w-full h-full object-cover rounded-md transform hover:scale-105 transition-transform duration-200">
+                      </div>
+
+                        <!-- Movie Title and Genre -->
+                        <h2 class="text-lg font-semibold text-center">{{ movie.title }}</h2>
+                        <div class="flex text-center w-full justify-center">
+                            <p class="text-center text-gray-100 line-clamp-3">Genres: {{ movie.genres }}</p>
+                        </div>
+                        <p class="text-center text-yellow-400">
+                            Rating: {{ movie.average_rating|default:"N/A" }} / 5.0
+                        </p>
+                    </li>
+                {% empty %}
+                    <p class="text-light-2 text-center col-span-full">No movies available.</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </main>
+</body>
+</html>
+
+

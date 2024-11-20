@@ -13,6 +13,7 @@
 }
 
 @layer utilities {
+
   /* TYPOGRAPHY */
   .h1-bold {
     @apply text-[36px] font-bold leading-[140%] tracking-tighter;
@@ -71,7 +72,7 @@
   }
 
   .text-glow {
-      filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.2)) drop-shadow(0 0 20px rgba(255, 20, 147, 0.2));
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.2)) drop-shadow(0 0 20px rgba(255, 20, 147, 0.2));
   }
 
   /* UTILITIES */
@@ -220,7 +221,7 @@
   }
 
   .upload-story-container {
-    @apply w-[1440px] h-[1024px] top-[-6902px] left-[3204px]  bg-dark-1 z-50;
+    @apply w-[1440px] h-[1024px] top-[-6902px] left-[3204px] bg-dark-1 z-50;
   }
 
   .user-story-list {
@@ -307,6 +308,7 @@
   .preview-image-container {
     @apply flex items-center justify-center w-[100px] h-[100px] bg-dark-1;
   }
+
   /** preview uploaded image before post ending **/
 
   /** Story viewer component **/
@@ -370,7 +372,7 @@
   }
 
   .post_details-delete_btn {
-    @apply p-0 flex gap-3 hover:bg-transparent hover:text-light-1  text-light-1 small-medium lg:base-medium;
+    @apply p-0 flex gap-3 hover:bg-transparent hover:text-light-1 text-light-1 small-medium lg:base-medium;
   }
 
   /* Profile */
@@ -383,7 +385,7 @@
   }
 
   .profile-tab {
-    @apply flex-center gap-3 py-4 w-48 bg-dark-2  transition flex-1 xl:flex-initial;
+    @apply flex-center gap-3 py-4 w-48 bg-dark-2 transition flex-1 xl:flex-initial;
   }
 
   /* Saved */
@@ -461,9 +463,11 @@
   .charts {
     @apply bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl border border-gray-700;
   }
+
   .line-chart {
     @apply w-full h-[300px];
   }
+
   .isActive {
     @apply absolute bottom-1 right-0 block h-3 w-3 rounded-full bg-green-600 border-white;
   }
@@ -482,6 +486,7 @@
 }
 
 @layer components {
+
   /* SHADCN COMPONENTS */
   /* Form */
   .shad-form_label {
@@ -520,4 +525,39 @@
   .shad-button_ghost {
     @apply flex gap-4 items-center justify-start hover:bg-transparent hover:text-white !important;
   }
+
+  @layer movies {
+    .movie-card {
+      @apply bg-dark-2 rounded-3xl border border-dark-4 p-5 lg:p-7 w-full max-w-screen-sm;
+    }
+
+    .movie-list {
+      @apply w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-7 max-w-5xl;
+    }
+
+    .movie-item {
+      @apply flex rounded-[24px] border border-dark-4 overflow-hidden cursor-pointer w-full h-full;
+    }
+
+    .movie-item:hover {
+      @apply shadow-lg;
+    }
+
+    .movie-item img:hover {
+      @apply transform scale-105;
+    }
+
+    .movie-card_img {
+      @apply h-64 xs:h-[400px] lg:h-[450px] w-full rounded-[24px] object-cover mb-5;
+    }
+
+    .movie-card_info {
+      @apply bg-dark-2 flex flex-col gap-5 lg:gap-7 flex-1 items-start p-8 rounded-[30px];
+    }
+
+    .movie-card_delete_btn {
+      @apply p-0 flex gap-3 hover:bg-transparent hover:text-light-1 text-light-1 small-medium lg:base-medium;
+    }
+  }
+
 }

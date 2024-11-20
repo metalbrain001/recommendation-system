@@ -36,3 +36,5 @@ New Movie Recommendations: For new movies with little to no ratings, you can mak
 Each of these enhancements can improve the recommendations and address common challenges like data sparsity and evolving user preferences. Together, they build a more robust, personalized system that users will find increasingly valuable and engaging.
 
 env LDFLAGS='-L/usr/local/lib -L/usr/local/opt/openssl/lib -L/usr/local/opt/readline/lib' pip install psycopg2
+
+docker run --name devuser -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres

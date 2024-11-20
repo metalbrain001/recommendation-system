@@ -13,8 +13,14 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 
 load_dotenv()
+
+ENVIRONMENT = env("ENV", default="local")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -108,7 +114,7 @@ DATABASES = {
         "USER": os.getenv("DB_USER", "timeless"),
         "PASSWORD": os.getenv("DB_PASS", "POSTGRES_PASSWORD"),
         "PORT": os.getenv("DB_PORT", "5432"),
-    }
+    },
 }
 
 
@@ -153,6 +159,20 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "theme/static_src/icons/"),
 ]
 
+if ENVIRONMENT == "docker":
+    # Docker-specific paths
+    MEDIA_ROOT = "/vol/web/media"
+    STATIC_ROOT = "/vol/web/static"
+else:
+    # Local paths for development and testing
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+MEDIA_URL = "/media/"
+STATIC_URL = "/static/"
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -162,4 +182,8 @@ AUTH_USER_MODEL = "core.User"
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "COMPONENT_SPLIT_REQUEST": True,
 }

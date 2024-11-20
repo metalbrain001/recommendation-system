@@ -13,7 +13,6 @@ class MovieLensDataLoader:
     def __init__(self, data_path=""):
         """
         Constructor for the MovieLensDataLoader class.
-
         :param data_path: The path to the MovieLens data.
         """
         self.data_path = data_path
@@ -22,7 +21,6 @@ class MovieLensDataLoader:
         """
         Load the MovieLens data files.
         (Movies, Ratings, Tags, Links)
-
         :return: The MovieLens data as a pandas DataFrame.
         """
 

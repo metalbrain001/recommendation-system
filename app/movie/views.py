@@ -13,7 +13,7 @@ from movie import serializer
 
 
 class MoviePagination(PageNumberPagination):
-    page_size = 10  # Number of items per page
+    page_size = 10
 
 
 class MovieViewSet(
@@ -39,16 +39,17 @@ class MovieViewSet(
 
     def get_queryset(self):
         """
-        Return objects for the current authenticated user only.
+        Return objects for the current authenticated user only,
+        consistently ordered by movie_id.
         """
 
-        genre = self.request.query_params.get("genre")
-        if genre:
-            return self.queryset.filter(
-                user=self.request.user, genres__regex=rf"\b{genre}\b"
-            ).order_by("-movie_id")
+        genre = self.request.query_params.get("genres")
+        queryset = self.queryset.filter(user=self.request.user).order_by("-movie_id")
 
-        return self.queryset.filter(user=self.request.user).order_by("-movie_id")
+        if genre:
+            queryset = queryset.filter(genres__regex=rf"(^|[|]){genre}([|]|$)")
+
+        return queryset
 
     def get_serializer_class(self):
         """

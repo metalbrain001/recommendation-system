@@ -2,6 +2,8 @@
 Django Database Models.
 """
 
+import os
+import uuid
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import (
@@ -11,6 +13,17 @@ from django.contrib.auth.models import (
 )
 from decimal import Decimal
 from django.core.validators import MinValueValidator, MaxValueValidator
+
+
+def user_image_file_path(instance, filename):
+    """
+    Generate file path for new user image.
+    """
+
+    ext = os.path.splitext(filename)[1]
+    filename = f"{uuid.uuid4()}{ext}"
+
+    return os.path.join("uploads", "user", filename)
 
 
 # Create your models here.
@@ -54,10 +67,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    image = models.ImageField(null=True, upload_to=user_image_file_path)
 
     objects = UserManager()
 
     USERNAME_FIELD = "email"
+
+    def get_image_url(self):
+        """
+        Returns the image URL for this movie instance.
+        """
+        return self.image.url
 
 
 class Movie(models.Model):

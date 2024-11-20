@@ -2,8 +2,10 @@
 This Module contains all test for models.
 """
 
+from unittest.mock import patch
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from core import models
 
 
 def create_user(email="user@example", password="testpass123"):
@@ -63,3 +65,14 @@ class ModelTests(TestCase):
         user = get_user_model().objects.create_superuser("test@example.com", "test123")
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+    @patch("core.models.uuid.uuid4")
+    def test_user_file_name_uuid(self, mock_uuid):
+        """
+        Test generating image path for new user.
+        """
+
+        uuid = "test-uuid"
+        mock_uuid.return_value = uuid
+        file_path = models.user_image_file_path(None, "myimage.jpg")
+        self.assertEqual(file_path, f"uploads/user/{uuid}.jpg")

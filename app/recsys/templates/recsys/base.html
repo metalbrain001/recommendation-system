@@ -1,25 +1,25 @@
 <!-- /recsys/templates/recsys/base.html -->
 {% load static tailwind_tags %}
+{% include 'recsys/modal.html' %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/svg+xml">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}MetalBrain{% endblock %}</title>
     {% tailwind_css %}
 </head>
 
 <body class=" text-white md:block backdrop-brightness-50" style="background-image: url('{% static 'poster1.webp' %}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-    <div class="container mx-auto">
+    <div class="container mx-auto" id="backgroundContent"> <!-- Added ID here -->
         <!-- Header section -->
         <header class="flex flex-col items-center justify-center h-[90vh] space-y-5 bg-opacity-75">
             <h1 class="h1-semibold text-glow"><span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-50 to-white">MOVIE RECOMMENDATION ENGINE</span></h1>
-            <p class="h2-bold text-glow"><span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-50 to-white">You cant decide what to watch? get personalized recommendations by</span></p>
-            <p class="h2-bold text-glow"><span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-50 to-white">answering a few questions ?</span></p>
-            <button class="home_button" type="submit">Start Here</button>
+            <button class="home_button" id="openModalButton" type="button">Start Here</button>
+            {% comment %} <button class="home_button" type="submit">Start Here</button> {% endcomment %}
         </header>
 
         <!-- Main content block -->
@@ -33,5 +33,17 @@
             <p class="base-semibold text-glow"><span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-50 to-slate-500" >© 2024 MetalBrain Inc. All rights reserved.</span></p>
         </footer>
     </div>
+    <!-- Add the JavaScript code here -->
+    <script>
+        // Open the modal by setting display to 'flex'
+        document.getElementById('openModalButton').addEventListener('click', function() {
+            document.getElementById('genreModal').style.display = 'flex';
+        });
+
+        // Close the modal by setting display to 'none'
+        document.getElementById('closeModalButton').addEventListener('click', function() {
+            document.getElementById('genreModal').style.display = 'none';
+        });
+    </script>
 </body>
 </html>

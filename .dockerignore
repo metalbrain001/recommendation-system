@@ -9,6 +9,7 @@ __pycache__
 node_modules
 .gitignore
 .docker
+.env.prod
 
 app/__pycache__
 app/*/__pycache__/
@@ -16,3 +17,8 @@ app/**/*/__pycache__/
 app/*/*/**/__pycache__/
 
 local-cdn/
+
+.DS_Store
+app/.DS_Store
+app/theme/.DS_Store
+app/theme/static_src/.DS_Store

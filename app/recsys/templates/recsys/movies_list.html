@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/svg+xml">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Movie List</title>
 
@@ -13,11 +13,11 @@
     {% block extra_head %}
     {% endblock %}
 </head>
-<body class="bg-gray-800 text-white">
+<body class="text-white">
     <!-- Header Section -->
-    <header class="py-6 text-center bg-gray-900 shadow-lg">
+    <header class="py-6 text-center shadow-lg">
         <div class="flex items-center justify-center p-4">
-            <h1 class="text-3xl font-bold text-center text-blue-600">Over 80,000 Movies available.</h1>
+            <h1 class="text-3xl font-bold text-center text-off-white">Over 80,000 Movies available.</h1>
         </div>
     </header>
 
@@ -46,8 +46,25 @@
                 {% endfor %}
             </ul>
         </div>
+        <!-- Pagination Controls -->
+        <div class="flex justify-center my-8">
+            {% if movies.has_previous %}
+                <a href="?page=1" class="mx-2 px-4 py-2 bg-blue-600 text-white rounded-md">First</a>
+                <a href="?page={{ movies.previous_page_number }}" class="mx-2 px-4 py-2 bg-blue-600 text-white rounded-md">Previous</a>
+            {% endif %}
+            <span class="mx-2 px-4 py-2 bg-slate-500 text-white rounded-md">Page {{ movies.number }} of {{ movies.paginator.num_pages }}</span>
+            {% if movies.has_next %}
+                <a href="?page={{ movies.next_page_number }}" class="mx-2 px-4 py-2 bg-cyan-950 text-white rounded-md">Next</a>
+                <a href="?page={{ movies.paginator.num_pages }}" class="mx-2 px-4 py-2 bg-cyan-950 text-white rounded-md">Last</a>
+            {% endif %}
+            {# Form to Jump to a Specific Page #}
+            <form action="" method="get" class="mx-2">
+                {% csrf_token %}
+                <input type="number" name="page" value="{{ movies.number }}" class="w-16 px-2 py-1 bg-dark-1 text-white rounded-md">
+                <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-md">Go</button>
+            </form>
+        </div>
     </main>
-
     <!-- Additional body content (scripts or modals) -->
     {% block extra_body %}
     {% endblock %}
