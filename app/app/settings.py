@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "drf_spectacular",
     "django_browser_reload",
+    "django_icons",
     "tailwind",
     "theme",
     "recsys",
@@ -70,6 +71,17 @@ TAILWIND_APP_NAME = "theme"
 EXTERNAL_IPS = ["127.0.0.1", "localhost"]
 
 NPM_BIN_PATH = "/Users/timeless/.nvm/versions/node/v20.17.0/bin/npm"
+
+DJANGO_ICONS = {
+    "ICONS": {
+        "star": {"name": "star", "style": "solid"},
+        "star-half": {"name": "star-half", "style": "solid"},
+        "star-empty": {"name": "star", "style": "regular"},
+        "star-empty": {"name": "star", "style": "regular"},
+        "back": {"name": "arrow-left", "pack": "fontawesome"},
+    }
+}
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -157,6 +169,7 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "theme/static_src/images/"),
     os.path.join(BASE_DIR, "theme/static_src/icons/"),
+    os.path.join(BASE_DIR, "theme/static_src/js/"),
 ]
 
 

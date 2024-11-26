@@ -13,7 +13,6 @@
 }
 
 @layer utilities {
-
   /* TYPOGRAPHY */
   .h1-bold {
     @apply text-[36px] font-bold leading-[140%] tracking-tighter;
@@ -72,7 +71,8 @@
   }
 
   .text-glow {
-    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.2)) drop-shadow(0 0 20px rgba(255, 20, 147, 0.2));
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.2))
+      drop-shadow(0 0 20px rgba(255, 20, 147, 0.2));
   }
 
   /* UTILITIES */
@@ -486,7 +486,6 @@
 }
 
 @layer components {
-
   /* SHADCN COMPONENTS */
   /* Form */
   .shad-form_label {
@@ -527,6 +526,10 @@
   }
 
   @layer movies {
+    .movie-container {
+      @apply min-h-[100vh] flex flex-col items-center gap-10 overflow-scroll py-10 px-5 md:p-14 custom-scrollbar;
+    }
+
     .movie-card {
       @apply bg-dark-2 rounded-3xl border border-dark-4 p-5 lg:p-7 w-full max-w-screen-sm;
     }
@@ -559,5 +562,4 @@
       @apply p-0 flex gap-3 hover:bg-transparent hover:text-light-1 text-light-1 small-medium lg:base-medium;
     }
   }
-
 }

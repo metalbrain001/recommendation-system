@@ -1,9 +1,9 @@
 <!-- /recsys/templates/recsys/base.html -->
 {% load static tailwind_tags %}
-{% include 'recsys/modal.html' %}
+{% load static %}
+{% load icons %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,38 +12,29 @@
     <title>{% block title %}MetalBrain{% endblock %}</title>
     {% tailwind_css %}
 </head>
+<body class="text-white md:block backdrop-brightness-50">
+    <!-- Background Wrapper -->
+    <div class="relative min-h-screen bg-cover bg-center bg-no-repeat"
+         style="background-image: url('{% static "darkbk.webp" %}');">
 
-<body class=" text-white md:block backdrop-brightness-50" style="background-image: url('{% static 'poster1.webp' %}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-    <div class="container mx-auto" id="backgroundContent"> <!-- Added ID here -->
-        <!-- Header section -->
-        <header class="flex flex-col items-center justify-center h-[90vh] space-y-5 bg-opacity-75">
-            <h1 class="h1-semibold text-glow"><span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-50 to-white">MOVIE RECOMMENDATION ENGINE</span></h1>
-            <button class="home_button" id="openModalButton" type="button">Start Here</button>
-            {% comment %} <button class="home_button" type="submit">Start Here</button> {% endcomment %}
-        </header>
+        <!-- Overlay Container for Content -->
+        <div class="container p-5">
+            <!-- Navbar -->
+            {% include 'recsys/navbar.html' %}
+        </div>
 
-        <!-- Main content block -->
-        <main class="py-8 bg-opacity-75">
-            {% block content %}
-            {% endblock %}
-        </main>
+        <!-- Header -->
+         <div class="container p-6 items-center justify-center">
+            {% include 'recsys/header.html' %}
+        </div>
 
-        <!-- Optional footer -->
-        <footer class="text-center py-4 bg-opacity-75">
-            <p class="base-semibold text-glow"><span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-50 to-slate-500" >© 2024 MetalBrain Inc. All rights reserved.</span></p>
-        </footer>
+            <!-- Main content block -->
+            <main class="py-8">
+                {% block content %}
+                {% endblock %}
+            </main>
+        </div>
     </div>
-    <!-- Add the JavaScript code here -->
-    <script>
-        // Open the modal by setting display to 'flex'
-        document.getElementById('openModalButton').addEventListener('click', function() {
-            document.getElementById('genreModal').style.display = 'flex';
-        });
-
-        // Close the modal by setting display to 'none'
-        document.getElementById('closeModalButton').addEventListener('click', function() {
-            document.getElementById('genreModal').style.display = 'none';
-        });
-    </script>
 </body>
 </html>
+

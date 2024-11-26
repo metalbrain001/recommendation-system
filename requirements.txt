@@ -11,4 +11,5 @@ requests==2.32.3
 django-widget-tweaks
 awscli
 django-environ
+django-icons
 

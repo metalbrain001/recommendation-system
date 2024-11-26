@@ -1,0 +1,47 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ movie.title }}</title>
+    {% tailwind_css %}
+</head>
+<body class="text-white">
+    <!-- Back Button -->
+    <a href="{% url 'recsys:movies_list' %}" class="text-blue-400 hover:underline px-4 py-2">← Back to Movies</a>
+
+    <!-- Movie Details Section -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Poster -->
+        <div class="flex items-center justify-center">
+            <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" class="w-full h-auto rounded-md shadow-md">
+        </div>
+
+        <!-- Movie Details -->
+        <div>
+            <h1 class="text-4xl font-bold mb-3">{{ movie_details.title }}</h1>
+            <p class="text-gray-400">Overview: {{ movie_details.overview }}</p>
+            <p class="text-yellow-400 mt-4">Genres: {{ movie.genres }}
+             {% for genre in movie_details.genres%}
+                 {{genre.name}}{% if not forloop.last %}, {% endif %}
+              {% endfor %}
+            </p>
+            <p class="text-yellow-400">Release Date: {{ movie_details.release_date }}</p>
+            <p class="text-yellow-400">Runtime: {{ movie_details.runtime }} minutes</p>
+            <p class="text-yellow-400">Budget: ${{ movie_details.budget|default:"N/A" }}</p>
+            <p class="text-yellow-400">Rating: {{ movie_details.vote_average }}/10</p>
+        </div>
+    </main>
+
+    <!-- Trailer Section -->
+    {% if trailer_url %}
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
+            <h2 class="text-3xl font-bold">Watch Trailer</h2>
+            <iframe class="w-full h-64 md:h-96 rounded-md mt-4" src="{{ trailer_url|safe }}" frameborder="0" allowfullscreen></iframe>
+        </div>
+    {% else %}
+        <p class="text-center text-gray-500 mt-8">Trailer not available for this movie.</p>
+    {% endif %}
+</body>
+</html>

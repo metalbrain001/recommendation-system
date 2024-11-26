@@ -1,0 +1,50 @@
+<!-- This is the navbar for the recsys app. -->
+{% load static tailwind_tags %}
+{% load static %}
+
+<!-- This is the navbar for the recsys app. -->
+<nav class="fixed flex items-center justify-between flex-wrap">
+    <div class="flex items-center flex-shrink-0 text-white mr-6">
+        <span class="font-semibold text-xl tracking-tight">MetalBrain</span>
+    </div>
+    <div class="block lg:hidden">
+        <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white">
+            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <title>Menu</title>
+                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+            </svg>
+        </button>
+    </div>
+    <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden" id="nav-content">
+        <div class="text-sm lg:flex-grow">
+            <a href="{% url 'recsys:movies_list' %}" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-yellow-400 mr-4">
+                Browse all
+            </a>
+            <a href="{% url 'recsys:movies_search' %}" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-yellow-400 mr-4">
+                Search Movies
+            </a>
+        </div>
+        <!-- Create a search box-->
+        <div class="relative text-gray-800">
+            <input
+                type="text"
+                id="movieSearchInput"
+                class="bg-gray-900 h-10 w-96 px-5 pr-10 rounded-lg text-sm text-white focus:outline-none"
+                placeholder="Search..."
+                autocomplete="off"
+            />
+            <ul id="searchResults" class="absolute z-10 bg-gray-300 text-gray-800 mt-2 w-full rounded-lg shadow-lg hidden">
+                <!-- Results will be dynamically inserted here -->
+            </ul>
+        </div>
+        <!-- Join button-->
+         <div class="flex items-center justify-end ml-20">
+            <a href="{% url 'recsys:register' %}" class="inline-block">
+                <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
+                    Join Now
+                </button>
+            </a>
+        </div>
+    </div>
+   <script src="{% static 'search.js' %}"></script>
+</nav>
