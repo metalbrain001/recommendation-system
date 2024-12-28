@@ -11,9 +11,9 @@ node_modules
 .dockerignore
 
 app/__pycache__
-app/*/__pycache__/
-app/**/*/__pycache__/
-app/*/*/**/__pycache__/
+app/__pycache__/
+app/__pycache__/
+app/__pycache__/
 
 local-cdn/
 
