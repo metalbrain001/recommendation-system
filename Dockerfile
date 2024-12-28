@@ -15,9 +15,13 @@ EXPOSE 8000
 
 ARG DEV=true
 
-RUN apk add --no-cache nodejs npm
-# Upgrade npm to the latest version
-RUN npm install -g npm@latest
+RUN apk add --no-cache curl tar xz && \
+  curl -o node.tar.xz https://nodejs.org/dist/v20.17.0/node-v20.17.0-linux-x64.tar.xz && \
+  mkdir -p /usr/local/lib/nodejs && \
+  tar -xJf node.tar.xz -C /usr/local/lib/nodejs && \
+  ln -s /usr/local/lib/nodejs/node-v20.17.0-linux-x64/bin/node /usr/local/bin/node && \
+  ln -s /usr/local/lib/nodejs/node-v20.17.0-linux-x64/bin/npm /usr/local/bin/npm && \
+  ln -s /usr/local/lib/nodejs/node-v20.17.0-linux-x64/bin/npx /usr/local/bin/npx
 
 RUN pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 
@@ -26,6 +30,7 @@ RUN python -m venv /py && \
   /py/bin/pip install --upgrade pip && \
   /py/bin/pip install "numpy<2" cython && \
   apk add --update --no-cache libgomp && \
+  apk add --update --no-cache libstdc++ && \
   apk add --update --no-cache postgresql-client jpeg-dev && \
   apk add --update --no-cache --virtual .tmp-build-deps \
   build-base postgresql-dev musl-dev zlib zlib-dev && \

@@ -2,8 +2,6 @@
 This module contains the views for the chatbot app.
 """
 
-import sys
-import os
 from rest_framework.response import Response
 import openai
 from rest_framework import viewsets, mixins
