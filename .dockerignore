@@ -21,3 +21,6 @@ local-cdn/
 app/.DS_Store
 app/theme/.DS_Store
 app/theme/static_src/.DS_Store
+
+# Include .pkl files in the app directory
+!app/*.pkl
