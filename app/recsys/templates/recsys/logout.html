@@ -1,0 +1,4 @@
+<form action="{% url 'recsys:logout' %}" method="post">
+  {% csrf_token %}
+  <button type="submit" class="text-red-500 hover:text-red-700">Logout</button>
+</form>

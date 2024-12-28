@@ -214,3 +214,21 @@ class UserCollection(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ChatHistory(models.Model):
+    """
+    Chat History model.
+    """
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    message = models.TextField()
+    response = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "Chat History"
+        ordering = ["-timestamp"]
+
+    def __str__(self):
+        return f"{self.user.email}: {self.message}"

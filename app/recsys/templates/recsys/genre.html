@@ -1,0 +1,35 @@
+<!-- This is the user profile page. It displays the user's email and provides links to the settings and logout pages. -->
+<!DOCTYPE html>
+
+<!--Load static tailwind tags-->
+{% load static tailwind_tags %}
+
+<!--Load static files-->
+{% load static %}
+
+<!--Load Icons-->
+{% load icons %}
+
+
+<div class="relative group">
+  <!-- Hamburger icon with dropdown -->
+  <button
+      id="genreDropdownButton"
+      class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-yellow-400"
+  >
+      <i class="fas fa-bars"></i> Genres
+  </button>
+  <!-- Dropdown menu -->
+  <div id="genreDropdown" class="absolute z-10 bg-gray-900 text-gray-200 mt-2 rounded-lg shadow-lg hidden group-hover:block">
+      <a href="{% url 'recsys:genre_movies_full_page' 'Action' %}" class="block px-4 py-2 hover:bg-gray-700" data-genre="Action">Action <a>
+      <a href="{% url 'recsys:genre_movies_full_page' 'Adventure' %}" class="block px-4 py-2 hover:bg-gray-700" data-genre="Adventure">Adventure</a>
+      <a href="{% url 'recsys:genre_movies_full_page' 'Animation' %}" class="block px-4 py-2 hover:bg-gray-700" data-genre="Animation">Animation</a>
+      <a href="{% url 'recsys:genre_movies_full_page' 'Comedy' %}" class="block px-4 py-2 hover:bg-gray-700" data-genre="Comedy">Comedy</a>
+      <a href="{% url 'recsys:genre_movies_full_page' 'Crime' %}" class="block px-4 py-2 hover:bg-gray-700" data-genre="Crime">Crime</a>
+      <a href="{% url 'recsys:genre_movies_full_page' 'Documentary' %}" class="block px-4 py-2 hover:bg-gray-700" data-genre="Documentary">Documentary</a>
+      <a href="{% url 'recsys:genre_movies_full_page' 'Drama' %}" class="block px-4 py-2 hover:bg-gray-700" data-genre="Drama">Drama</a>
+      <a href="{% url 'recsys:genre_movies_full_page' 'Romance' %}" class="block px-4 py-2 hover:bg-gray-700" data-genre="Romance">Romance</a>
+      <!-- Add more genres as needed -->
+  </div>
+  <script src="{% static 'modal.js' %}"></script>
+</div>

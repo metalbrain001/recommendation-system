@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- Load Tailwind CSS -->
+{% load static tailwind_tags %}
+
+<!-- Load static files -->
+{% load static %}
+
+
+<!-- Load tailwind-->
+{% tailwind_css %}
+
+
+{% block content %}
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
+    <!-- Back Button -->
+    <div class="w-full mb-3">
+       <a href="{% url 'recsys:dashboard' %}" class="text-blue-400 hover:underline">← back</a>
+    </div>
+
+    <!-- Genre Movies Section -->
+    <div>
+      <p class="text-sm font-bold text-yellow-400 mb-4">browsing by genre</p>
+    </div>
+
+    <h2 class="text-2xl font-bold text-yellow-400 mb-4 capitalize">{{ genre }} Movies</h2>
+
+    <!-- Movie Grid -->
+    <div class="movie-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        <!-- Movies will be dynamically loaded by JavaScript -->
+        <p class="text-gray-300 col-span-full text-center">Loading movies...</p>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-container flex justify-center mt-8">
+
+    </div>
+    <script type="module" src="{% static 'genre_movies.js' %}"></script>
+</section>
+{% endblock %}

@@ -27,3 +27,20 @@ class UserRegistrationForm(forms.Form):
         self.fields["email"].required = True
         self.fields["name"].required = True
         self.fields["password"].required = True
+
+
+class LoginForm(forms.Form):
+    email = forms.EmailField(
+        label="Email",
+        max_length=100,
+        widget=forms.EmailInput(attrs={"class": "form-email"}),
+        help_text="Enter your email address",
+    )
+    password = forms.CharField(
+        label="Password", widget=forms.PasswordInput(attrs={"class": "form-password"})
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+        self.fields["email"].required = True
+        self.fields["password"].required = True

@@ -9,17 +9,17 @@
 </head>
 <body class="text-white">
     <!-- Back Button -->
-    <a href="{% url 'recsys:movies_list' %}" class="text-blue-400 hover:underline px-4 py-2">← Back to Movies</a>
+    <a href="{% url 'recsys:dashboard' %}" class="text-blue-400 hover:underline px-4 py-2">← Back to Movies</a>
 
     <!-- Movie Details Section -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8 grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Poster -->
-        <div class="flex items-center justify-center">
+        <div id="movie-poster" class="flex items-center justify-center">
             <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" class="w-full h-auto rounded-md shadow-md">
         </div>
 
         <!-- Movie Details -->
-        <div>
+        <div id="movie-details">
             <h1 class="text-4xl font-bold mb-3">{{ movie_details.title }}</h1>
             <p class="text-gray-400">Overview: {{ movie_details.overview }}</p>
             <p class="text-yellow-400 mt-4">Genres: {{ movie.genres }}
@@ -36,12 +36,16 @@
 
     <!-- Trailer Section -->
     {% if trailer_url %}
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
+        <div id="movie-trailer" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
             <h2 class="text-3xl font-bold">Watch Trailer</h2>
             <iframe class="w-full h-64 md:h-96 rounded-md mt-4" src="{{ trailer_url|safe }}" frameborder="0" allowfullscreen></iframe>
         </div>
     {% else %}
         <p class="text-center text-gray-500 mt-8">Trailer not available for this movie.</p>
     {% endif %}
+    <script>
+        const movieDetailsApiUrl = "{% url 'recsys:movies_details' movie.movie_id %}";
+    </script>
+    <script type="module" src="{% static 'movies_details.js' %}"></script>
 </body>
 </html>

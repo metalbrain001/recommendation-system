@@ -35,40 +35,12 @@
                 {% endfor %}
             {% endif %}
         </div>
+        <script>
+            const registerUrl = "{% url 'user:create' %}";
+            const csrfToken = "{{ csrf_token }}";
+            const redirectUrl = "{% url 'recsys:login' %}";
+        </script>
+        <script src="{% static 'register.js' %}"></script>
     </section>
-
-
-    <script>
-        document.getElementById("registrationForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
-
-            // Gather form data
-            const formData = new FormData(event.target);
-            const data = {
-                email: formData.get("email"),
-                name: formData.get("name"),
-                password: formData.get("password")
-            };
-
-            // Submit to the API endpoint
-            const response = await fetch("{% url 'user:create' %}", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": "{{ csrf_token }}"
-                },
-                body: JSON.stringify(data)
-            });
-
-            const result = await response.json();
-            const messageDiv = document.getElementById("message");
-
-            if (response.status === 201) {
-                messageDiv.textContent = "Registration successful!";
-            } else {
-                messageDiv.textContent = "Error:" + (result.detail || "Unable to register");
-            }
-        });
-    </script>
 </body>
 </html>

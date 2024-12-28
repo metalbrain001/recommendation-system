@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--Load static tailwind tags-->
+{% load static tailwind_tags %}
+
+<!--Load tailwind css-->
+{% tailwind_css %}
+
+<!--Load static files-->
+{% load static %}
+
+<!--Load icons-->
+{% load icons %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/svg+xml">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+</head>
+<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+<body>
+        <!-- Main content block -->
+        <main class="container">
+                <!-- Overlay Container for Content -->
+            <div class="container p-5">
+                <!-- Navbar -->
+                {% include 'recsys/nav.html' %}
+            </div>
+                <div class="flex items-center justify-center h3-bold p-5">
+                    <h2 id="welcome-message">
+                        Welcome to the dashboard!
+                    </h2>
+                </div>
+                <h3 class="text-2xl font-bold text-yellow-400 mb-4">Top Picks:</h3>
+                <section id="top_rated_movies" class="flex gap-6 overflow-x-auto">
+                    <div class="flex flex-wrap gap-6 justify-start">
+                        <!-- Dynamic movie posters will be inserted here by JavaScript -->
+                        <p class="text-gray-300 text-center w-full">Loading top-rated movies...</p>
+                    </div>
+                </section>
+                <h3 class="text-2xl font-bold text-yellow-400 mt-4 mb-4">Recent Releases:</h3>
+                <section id="recent_release_movies" class="flex gap-6 overflow-x-auto">
+                    <div class="flex flex-wrap gap-6 justify-start">
+                        <!-- Dynamic movie posters will be inserted here by JavaScript -->
+                        <p class="text-gray-300 text-center w-full">Loading recent release movies...</p>
+                    </div>
+                </section>
+                <h3 class="text-2xl font-bold text-yellow-400 mt-4 mb-4">Action Movies:</h3>
+                <section id="action_movies" class="flex gap-6 overflow-x-auto">
+                    <div class="flex gap-6 overflow-x-auto">
+                        <p class="text-gray-300 text-center w-full">Loading action movies...</p>
+                    </div>
+                </section>
+                <h3 class="text-2xl font-bold text-yellow-400 mt-4 mb-4">Romantic Movies:</h3>
+                <section id="romance_movies" class="flex gap-6 overflow-x-auto">
+                    <div class="flex gap-6 overflow-x-auto">
+                        <p class="text-gray-300 text-center w-full">Loading Romantic movies...</p>
+                    </div>
+                </section>
+                <h3 class="text-2xl font-bold text-yellow-400 mt-4 mb-4">Documentaries:</h3>
+                <section id="documentary_movies" class="flex gap-6 overflow-x-auto">
+                    <div class="flex gap-6 overflow-x-auto">
+                        <p class="text-gray-300 text-center w-full">Loading documentaries...</p>
+                    </div>
+                </section>
+            </main>
+      <script>
+        const dashboardUrl = "{% url 'recsys:dashboard' %}";
+        const topRatedMovies = "{% url 'recsys:top_rated_movies' %}";
+        const recent_release_Movies = "{% url 'recsys:recent_release_movies' %}";
+        const moviesByGenre = "/movies_by_genre/";
+        const csrfToken = "{{ csrf_token }}";
+    </script>
+    <script type="module" src="{% static 'top_rated_movies.js' %}"></script>
+    <script type="module" src="{% static 'recent_release_movies.js' %}"></script>
+    <script type="module" src="{% static 'movies_by_genre.js' %}"></script>
+    <script type="module" src="{% static 'dashboard.js' %}"></script>
+    <div class="container p-5">
+        <!-- Navbar -->
+        {% include 'recsys/footer.html' %}
+    </div>
+</body>
+</html>
+

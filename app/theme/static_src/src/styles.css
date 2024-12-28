@@ -562,4 +562,38 @@
       @apply p-0 flex gap-3 hover:bg-transparent hover:text-light-1 text-light-1 small-medium lg:base-medium;
     }
   }
+
+  @layer components {
+    .chatbot-container {
+      @apply fixed bottom-16 right-4 bg-gray-200 w-96 mr-10 max-w-full shadow-lg rounded-lg overflow-hidden z-50 flex flex-col;
+    }
+
+    .chatbot-header {
+      @apply bg-gray-700 text-white p-4 text-lg font-bold flex justify-between items-center;
+    }
+
+    .chatbot-body {
+      @apply p-4;
+    }
+
+    .chatbot-messages {
+      @apply max-h-64 overflow-y-auto mb-4 p-2 bg-gray-900 rounded-lg;
+    }
+
+    .chatbot-input {
+      @apply flex items-center gap-2;
+    }
+
+    .chatbot-input-text {
+      @apply flex-grow p-2 rounded-l-lg border border-gray-300 outline-none;
+    }
+
+    .chatbot-input-button {
+      @apply bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-r-lg;
+    }
+
+    .chatbot-icon {
+      @apply fixed bottom-4 right-4 mr-5 bg-blue-500 p-4 rounded-full shadow-lg cursor-pointer hover:bg-blue-600 z-50;
+    }
+  }
 }

@@ -39,9 +39,16 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 TMDB_API_KEY = os.getenv("TMDB_API_KEY")
 
+OPEN_AI_API_KEY = os.getenv("OPEN_AI_API_KEY")
+
+RECOMMENDER_COLLABORATIVE_MODEL_PATH = os.getenv("RECOMMENDER_COLLABORATIVE_MODEL_PATH")
+RECOMMENDER_CONTENT_MODEL_PATH = os.getenv("RECOMMENDER_CONTENT_MODEL_PATH")
+
+RECOMMENDER_DATA_PATH = os.getenv("RECOMMENDER_DATA_PATH")
+RECOMMENDER_MODEL_PATH = os.path.join(BASE_DIR, "recommender/models")
+
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -63,6 +70,9 @@ INSTALLED_APPS = [
     "links",
     "ratings",
     "tag",
+    "chatbot",
+    "recommender",
+    "src",
     "widget_tweaks",
 ]
 
@@ -79,6 +89,7 @@ DJANGO_ICONS = {
         "star-empty": {"name": "star", "style": "regular"},
         "star-empty": {"name": "star", "style": "regular"},
         "back": {"name": "arrow-left", "pack": "fontawesome"},
+        "robot": {"name": "robot", "pack": "fontawesome"},
     }
 }
 
@@ -128,6 +139,22 @@ DATABASES = {
         "PORT": os.getenv("DB_PORT", "5432"),
     },
 }
+
+LOGIN_URL = "/login/"
+LOGIN_REDIRECT_URL = "/dashboard/"
+LOGOUT_REDIRECT_URL = "/login/"
+
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_COOKIE_AGE = 1209600  # 2 weeks
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_NAME = "sessionid"
+SESSION_COOKIE_SECURE = False  # Use only over HTTPS
+SESSION_COOKIE_HTTPONLY = False  # Restrict JavaScript access
+SESSION_COOKIE_SAMESITE = "Lax"  # Control cross-site behavior
+CSRF_COOKIE_SECURE = False  # Set to True only if using HTTPS
+CSRF_USE_SESSIONS = True  # Link CSRF to session
+CSRF_COOKIE_SAMESITE = "Lax"
 
 
 # Password validation
@@ -190,8 +217,20 @@ AUTH_USER_MODEL = "core.User"
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+    ],
 }
+
+AUTHENTICATION_BACKENDS = [
+    "user.backends.EmailBackend",  # Path to EmailBackend
+    "django.contrib.auth.backends.ModelBackend",  # Default
+]
 
 SPECTACULAR_SETTINGS = {
     "COMPONENT_SPLIT_REQUEST": True,
 }
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",  # Default
+]

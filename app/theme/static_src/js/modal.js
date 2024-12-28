@@ -1,26 +1,17 @@
-document.getElementById('openModalButton').addEventListener('click', function () {
-    document.getElementById('genreModal').style.display = 'flex';
+document.addEventListener("DOMContentLoaded", () => {
+    const genreDropdownButton = document.getElementById("genreDropdownButton");
+    const genreDropdown = document.getElementById("genreDropdown");
+
+    // Toggle dropdown visibility
+    genreDropdownButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        genreDropdown.classList.toggle("hidden");
+    });
+
+    // Optional: Close dropdown when clicking outside
+    window.addEventListener("click", (event) => {
+        if (!genreDropdown.contains(event.target) && event.target !== genreDropdownButton) {
+            genreDropdown.classList.add("hidden");
+        }
+    });
 });
-
-document.getElementById('closeModalButton').addEventListener('click', function () {
-    document.getElementById('genreModal').style.display = 'none';
-});
-
-document.getElementById('genre').addEventListener('change', function () {
-    const selectedGenre = this.value;
-    const closeModalButton = document.getElementById('closeModalButton');
-
-    if (selectedGenre) {
-        // Update button text and appearance
-        closeModalButton.textContent = 'Browse';
-        closeModalButton.classList.remove('bg-gray-500', 'hover:bg-gray-700');
-        closeModalButton.classList.add('bg-blue-500', 'hover:bg-blue-700');
-
-        // Change button behavior
-        closeModalButton.onclick = function () {
-            console.log(`Browsing ${selectedGenre} movies...`); // Replace with actual browsing logic
-            document.getElementById('genreModal').style.display = 'none';
-        };
-    }
-});
-

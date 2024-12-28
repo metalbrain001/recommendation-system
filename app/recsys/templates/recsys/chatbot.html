@@ -1,0 +1,58 @@
+<!-- This file contains chatbot interface.-->
+
+{% load static tailwind_tags %}
+{% load static %}
+
+<!--Load Icons-->
+{% load icons %}
+
+<!--Load Arrow back icons-->
+{% icon "robot" %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="{% static 'favicon.ico' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chatbot</title>
+
+  <!-- Additional head content (CSS or JavaScript) -->
+  {% block extra_head %}
+  {% endblock %}
+</head>
+
+<section class="chatbot">
+  <!-- Chatbot Icon -->
+  <div id="chatbot-icon" class="chatbot-icon">
+      <i class="fa-solid fa-robot text-white text-2xl"></i>
+  </div>
+
+  <!-- Chatbot Container -->
+  <div class="chatbot-container">
+      <!-- Chatbot Header -->
+      <div class="chatbot-header">
+          <h1 class="chatbot-title">Chatbot</h1>
+          <button id="chatbot-close" class="hover:text-red-500 text-xl">&times;</button>
+      </div>
+
+      <!-- Chatbot Body -->
+      <div class="chatbot-body">
+          <!-- Chatbot Messages -->
+          <div id="chatbot-messages" class="chatbot-messages">
+              <div class="chatbot-message chatbot-message-bot text-gray-300">
+                  <p>Hello! Try out our chatbot to help you find movies.</p>
+              </div>
+          </div>
+
+          <!-- Chatbot Input -->
+          <div class="chatbot-input flex items-center text-gray-800">
+              <input type="text" id="chatbot-input" class="chatbot-input-text text-" placeholder="Type a message..." />
+              <button id="chatbot-send" class="chatbot-input-button bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-r-lg">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+      </div>
+  </div>
+  <script src="{% static 'chatbot.js' %}"></script>
+</section>

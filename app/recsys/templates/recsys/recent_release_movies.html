@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+{% extends 'recsys/dashboard.html' %}
+
+<!--Load static tailwind tags-->
+{% load static tailwind_tags %}
+
+<!--Load tailwind css-->
+{% tailwind_css %}
+
+<!--Load static files-->
+{% load static %}
+
+
+{% block title %}Recent Releases{% endblock %}
+
+{% block content %}
+<section>
+    <h2 class="text-2xl font-bold text-yellow-400 mb-4">Recent Releases:</h2>
+    <div class="flex flex-wrap gap-6 justify-center">
+        {% for movie in movies %}
+            <div class="movie-item w-64 bg-slate-800 p-4 rounded-lg shadow-lg">
+                <a href="{% url 'recsys:movies_details' movie.movie_id %}">
+                    <div class="h-48 bg-gray-700 rounded-md overflow-hidden mb-4">
+                        <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" class="w-full h-full object-cover rounded-md transform hover:scale-105 transition-transform duration-200">
+                    </div>
+                </a>
+                <h3 class="text-lg font-semibold text-center">{{ movie.title }}</h3>
+                <div class="flex flex-wrap justify-center gap-2 mt-2">
+                    {% for genre in movie.genres %}
+                        <span class="bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded">{{ genre }}</span>
+                    {% endfor %}
+                </div>
+                <p class="text-center text-yellow-400">
+                    Rating: {{ movie.average_rating|default:"N/A" }} / 5.0
+                 </p>
+            </div>
+        {% empty %}
+            <p class="text-center">No recent release movies available.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+ <script src="{% static 'recent_release_movies.js' %}"></script>
+{% endblock %}

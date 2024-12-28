@@ -1,0 +1,35 @@
+{% load static tailwind_tags %}
+{% tailwind_css %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+
+<section class="flex flex-col items-center justify-center gap-5 w-full h-screen mt-4">
+  <div class="p-4">
+    <a href="{% url 'recsys:base' %}" class="text-2xl font-semibold text-white hover:text-yellow-400">
+        <i class="fas fa-film"></i> ← MetalBrain
+    </a>
+  </div>
+
+    <div>
+        <h1 class="text-3xl font-semibold">Welcome Back!</h1>
+    </div>
+    <form id="loginForm" method="post" class="flex flex-col gap-2 w-[420px]">
+        {% csrf_token %}
+        {% render_field form.email placeholder="email" class+="form-control text-gray-900 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-cyan-500" %} <br>
+        {% render_field form.password placeholder="Password" class+="form-control text-gray-900 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-cyan-500" %} <br>
+        <button type="submit" class="px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-pink-500 text-white font-semibold shadow-lg">Login</button>
+    </form>
+    <div id="message">
+        {% if messages %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% endif %}
+    </div>
+    <script>
+        const loginUrl = "{% url 'recsys:login' %}";
+        const csrfToken = "{{ csrf_token }}";
+        const redirectUrl = "{% url 'recsys:dashboard' %}";
+    </script>
+    <script src="{% static 'login.js' %}"></script>
+</section>

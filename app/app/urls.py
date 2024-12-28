@@ -39,6 +39,7 @@ urlpatterns = [
     path("api/ratings/", include("ratings.urls")),
     path("api/tag/", include("tag.urls")),
     path("api/links/", include("links.urls")),
+    path("api/chatbot/", include("chatbot.urls")),
     path("__reload__/", include("django_browser_reload.urls")),
 ]
 

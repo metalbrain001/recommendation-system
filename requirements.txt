@@ -12,4 +12,8 @@ django-widget-tweaks
 awscli
 django-environ
 django-icons
+openai==1.56.0
+scikit-learn==1.5.2
+scikit-surprise==1.1.4
+SQLAlchemy==2.0.36
 

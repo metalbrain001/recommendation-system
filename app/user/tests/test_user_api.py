@@ -10,6 +10,7 @@ from rest_framework.test import APIClient
 
 
 CREATE_USER_URL = reverse("user:create")
+LOGIN_USER_URL = reverse("user:login")
 TOKEN_URL = reverse("user:token")
 ME_URL = reverse("user:me")
 
@@ -42,6 +43,28 @@ class PublicUserApiTests(TestCase):
         }
         res = self.client.post(CREATE_USER_URL, payload)
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        user = get_user_model().objects.get(email=payload["email"])
+        self.assertTrue(user.check_password(payload["password"]))
+        self.assertNotIn("password", res.data)
+
+    def test_user_can_log_in(self):
+        """
+        Test if a user can log
+        in with valid credentials.
+        """
+
+        payload = {
+            "email": "user1@example.com",
+            "password": "testpass123",
+        }
+
+        create_user(email=payload["email"], password=payload["password"])
+
+        # Send POST request to login endpoint
+        res = self.client.post(LOGIN_USER_URL, payload)
+
+        # Validate response
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
         user = get_user_model().objects.get(email=payload["email"])
         self.assertTrue(user.check_password(payload["password"]))
         self.assertNotIn("password", res.data)

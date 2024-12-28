@@ -1,0 +1,37 @@
+<!-- This is the user profile page. It displays the user's email and provides links to the settings and logout pages. -->
+<!DOCTYPE html>
+
+<!--Load static tailwind tags-->
+{% load static tailwind_tags %}
+
+<!--Load static files-->
+{% load static %}
+
+<!--Load Icons-->
+{% load icons %}
+
+<div class="relative flex ml-20">
+  <!-- User Icon Button -->
+  <button id="user-menu-button" class="flex bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-1 rounded text-sm     items-center">
+      <i class="fa-solid fa-user"></i>
+      <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+  </button>
+
+  <!-- Dropdown Menu -->
+  <div id="user-menu" class="hidden absolute left-3 mt-6 w-48 bg-slate-900 rounded-md shadow-lg z-50">
+      <div class="py-2 text-gray-700">
+          <span class="block px-4 py-2 text-sm font-medium">{{ user.email }}</span>
+          <hr class="border-gray-200" />
+          <a href="/settings" class="block px-4 py-2 text-sm hover:bg-gray-100">Settings</a>
+          <hr class="border-gray-200" />
+          <form method="POST" action="{% url 'recsys:logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="block px-4 py-2 text-sm hover:bg-gray-100">Logout</button>
+        </form>
+      </div>
+  </div>
+</div>
+
+<!-- Compare this snippet from app/recsys/templates/recsys/settings.html: -->
