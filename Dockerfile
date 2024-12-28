@@ -7,8 +7,8 @@ ENV SURPRISE_DATA_FOLDER=/app/.surprise_data
 COPY ./requirements.txt /tmp/requirements.txt
 COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 COPY ./app /app
-COPY .app/app/collaborative_model.pkl app/app/collaborative_model.pkl
-COPY .app/app/content_model.pkl app/app/content_model.pkl
+COPY ./app/collaborative_model.pkl /app/collaborative_model.pkl
+COPY ./app/content_model.pkl /app/content_model.pkl
 WORKDIR /app
 
 EXPOSE 8000
